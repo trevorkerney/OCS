@@ -6,6 +6,8 @@
 #include "../inc/schedule.h"
 
 using std::string;
+using std::cout;
+using std::endl;
 
 #ifdef _WIN32
 
@@ -58,16 +60,16 @@ using std::string;
 
 #endif
 
-string get_formatted_timestamp()
+string get_formatted_timestamp(time_t p_timestamp = time(0), const char* p_format = "%Y %b %d %a %I:%M %p") // https://en.cppreference.com/w/cpp/chrono/c/strftime
 {
     const int timestamp_size = 80;
     char timestamp_buffer[timestamp_size];
-    time_t timestamp = time(0);
+    time_t timestamp = p_timestamp;
     tm* timeinfo = localtime(&timestamp);
     strftime(
         timestamp_buffer,
         timestamp_size,
-        "%Y %b %d %a %I:%M %p", // https://en.cppreference.com/w/cpp/chrono/c/strftime
+        p_format,
         timeinfo
     );
 
@@ -76,51 +78,50 @@ string get_formatted_timestamp()
 
 int main(int argc, char* argv[])
 {
-    if (argc == 1)
+    if (argc == 3)
     {
-        std::cout << "On-Call Scheduler";
-    }
-    else
-    {
-        /*
-        CREATE
-            SCHEDULE
-                
-        ADD
-            EMPLOYEE
-            POSITION
-        EDIT
-            SCHEDULE
-            EMPLOYEE
-            POSITION
-        DELETE
-            SCHEDULE
-            EMPLOYEE
-            POSITION
-        */
-
-        if (strcmp(argv[1], "create") == 0)
+        string command = string(argv[1]) + ' ' + string(argv[2]);
+        if (command == "create schedule")
         {
             
         }
-        else if (strcmp(argv[1], "add") == 0)
+        else if (command == "create position")
         {
 
         }
-        else if (strcmp(argv[1], "edit") == 0)
+        else if (command == "create employee")
+        {
+            
+        }
+        else if (command == "edit schedule")
         {
 
         }
-        else if (strcmp(argv[1], "delete") == 0)
+        else if (command == "edit position")
         {
 
         }
-        else
+        else if (command == "edit employee")
         {
-            std::cout << "Invalid option(s)." << std::endl;
-            return 1;
+            
         }
+        else if (command == "delete schedule")
+        {
+
+        }
+        else if (command == "delete position")
+        {
+
+        }
+        else if (command == "delete employee")
+        {
+            
+        }
+
+        return 0;
     }
 
-    return 0;
+    cout << "On-Call Scheduler" << endl;
+    cout << "Usage: ocs [create/edit/delete] [schedule/position/employee]" << endl;
+    return 1;
 }

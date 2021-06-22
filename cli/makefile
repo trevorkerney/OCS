@@ -12,13 +12,22 @@ else
 	CLEAN=-rm bin/*
 endif
 
-make: bin/OCS-cli
+make: bin bin/OCS-cli
 
-bin/OCS-cli: bin bin/main.o
-	$(CC) -g -o $@$(EXECEXT) bin/main.o
+bin/OCS-cli: bin/main.o bin/schedule.o bin/position.o bin/employee.o
+	$(CC) -g -o $@$(EXECEXT) $^
 
 bin/main.o: src/main.cpp
-	$(CC) -c -g $(VERS) $(CWARN) -o $@ src/main.cpp
+	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
+
+bin/schedule.o: src/schedule.cpp inc/schedule.h
+	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
+
+bin/position.o: src/position.cpp inc/position.h
+	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
+
+bin/employee.o: src/employee.cpp inc/employee.h
+	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
 
 .PHONY: bin clean
 
