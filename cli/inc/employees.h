@@ -7,11 +7,17 @@
 using std::string;
 using std::vector;
 
+class Position;
+
+class Employee;
+class Employees;
+
 class Employee
 {
 private:
 
     string name;
+    vector<Position> positions;
 
 public:
 
@@ -21,6 +27,18 @@ public:
     void set_name(string& p_name);
     string get_name() const;
     
+};
+
+class Employees
+{
+private:
+
+    vector<Employee> employees;
+
+public:
+
+
+
 };
 
 #endif

@@ -1,4 +1,4 @@
-#include "../inc/schedule.h"
+#include "../inc/schedules.h"
 
 ScheduleEntry::ScheduleEntry(vector<Employee>& p_employees, time_t p_timestamp = time(0))
 {

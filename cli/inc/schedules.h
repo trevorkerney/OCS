@@ -1,7 +1,7 @@
 #ifndef _OCS_SCHEDULE
 #define _OCS_SCHEDULE
 
-#include "position.h"
+#include "positions.h"
 
 #include <string>
 #include <vector>
@@ -12,6 +12,7 @@ using std::vector;
 
 class ScheduleEntry;
 class Schedule;
+class Schedules;
 
 class ScheduleEntry
 {
@@ -44,6 +45,11 @@ public:
     Schedule();
     ~Schedule();
 
+};
+
+class Schedules
+{
+    vector<Schedule> schedules;
 };
 
 #endif

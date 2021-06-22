@@ -1,4 +1,4 @@
-#include "../inc/employee.h"
+#include "../inc/employees.h"
 
 Employee::Employee(string& p_name)
 {

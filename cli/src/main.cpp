@@ -3,7 +3,7 @@
 #include <string>
 #include <cstring>
 
-#include "../inc/schedule.h"
+#include "../inc/schedules.h"
 
 using std::string;
 using std::cout;

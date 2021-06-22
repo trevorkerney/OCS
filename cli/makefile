@@ -14,19 +14,19 @@ endif
 
 make: bin bin/OCS-cli
 
-bin/OCS-cli: bin/main.o bin/schedule.o bin/position.o bin/employee.o
+bin/OCS-cli: bin/main.o bin/schedules.o bin/positions.o bin/employees.o
 	$(CC) -g -o $@$(EXECEXT) $^
 
 bin/main.o: src/main.cpp
 	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
 
-bin/schedule.o: src/schedule.cpp inc/schedule.h
+bin/schedules.o: src/schedules.cpp inc/schedules.h
 	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
 
-bin/position.o: src/position.cpp inc/position.h
+bin/positions.o: src/positions.cpp inc/positions.h
 	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
 
-bin/employee.o: src/employee.cpp inc/employee.h
+bin/employees.o: src/employees.cpp inc/employees.h
 	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
 
 .PHONY: bin clean

@@ -1,4 +1,4 @@
-#include "../inc/position.h"
+#include "../inc/positions.h"
 
 Position::Position(string& p_name, string& p_filename, vector<Employee>& p_employees)
 {
