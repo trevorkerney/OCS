@@ -37,7 +37,10 @@ private:
 
 public:
 
+    Employees();
+    ~Employees();
 
+    
 
 };
 

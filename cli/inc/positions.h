@@ -9,6 +9,9 @@
 using std::string;
 using std::vector;
 
+class Position;
+class Positions;
+
 class Position
 {
 private:
@@ -30,6 +33,19 @@ public:
 
     void set_employees(vector<Employee>& p_employees);
     vector<Employee> get_employees() const;
+
+};
+
+class Positions
+{
+private:
+
+    vector<Position> positions;
+
+public:
+
+    Positions();
+    ~Positions();
 
 };
 

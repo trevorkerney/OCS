@@ -41,3 +41,15 @@ vector<Employee> Position::get_employees() const
 {
     return this -> employees;
 }
+
+
+
+Positions::Positions()
+{
+
+}
+
+Positions::~Positions()
+{
+    
+}

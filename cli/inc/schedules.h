@@ -49,7 +49,15 @@ public:
 
 class Schedules
 {
+private:
+
     vector<Schedule> schedules;
+
+public:
+
+    Schedules();
+    ~Schedules();
+
 };
 
 #endif

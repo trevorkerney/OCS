@@ -19,3 +19,15 @@ string Employee::get_name() const
 {
     return this -> name;
 }
+
+
+
+Employees::Employees()
+{
+
+}
+
+Employees::~Employees()
+{
+    
+}
