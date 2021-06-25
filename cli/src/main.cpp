@@ -78,50 +78,14 @@ string get_formatted_timestamp(time_t p_timestamp = time(0), const char* p_forma
 
 int main(int argc, char* argv[])
 {
-    if (argc == 3)
+    if (argc == 1)
     {
-        string command = string(argv[1]) + ' ' + string(argv[2]);
-        if (command == "create schedule")
-        {
-            
-        }
-        else if (command == "create position")
-        {
-
-        }
-        else if (command == "create employee")
-        {
-            
-        }
-        else if (command == "edit schedule")
-        {
-
-        }
-        else if (command == "edit position")
-        {
-
-        }
-        else if (command == "edit employee")
-        {
-            
-        }
-        else if (command == "delete schedule")
-        {
-
-        }
-        else if (command == "delete position")
-        {
-
-        }
-        else if (command == "delete employee")
-        {
-            
-        }
+        cout << "On-Call Scheduler" << endl;
+        cout << get_formatted_timestamp() << endl;
 
         return 0;
     }
-
-    cout << "On-Call Scheduler" << endl;
-    cout << "Usage: ocs [create/edit/delete] [schedule/position/employee]" << endl;
+    
+    //cout << "Usage: ocs-cli [create/edit/delete] [schedule/position/employee]" << endl;
     return 1;
 }
