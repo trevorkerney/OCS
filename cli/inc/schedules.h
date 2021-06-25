@@ -1,5 +1,4 @@
-#ifndef _OCS_SCHEDULE
-#define _OCS_SCHEDULE
+#pragma once
 
 #include "positions.h"
 
@@ -10,26 +9,22 @@
 using std::string;
 using std::vector;
 
-class ScheduleEntry;
-class Schedule;
-class Schedules;
-
 class ScheduleEntry
 {
 private:
 
-    vector<Employee> employees;
+    vector<Employee*> employees;
     time_t timestamp;
 
 public:
 
-    ScheduleEntry(vector<Employee>& p_employees, time_t p_timestamp);
+    ScheduleEntry(vector<Employee*>& p_employees, time_t p_timestamp);
     ~ScheduleEntry();
 
-    void set_employees(vector<Employee>& p_employees);
+    void set_employees(vector<Employee*>& p_employees);
     void set_timestamp(time_t& p_timestamp);
 
-    vector<Employee> get_employees() const;
+    vector<Employee*> get_employees() const;
     time_t get_timestamp() const;
 
 };
@@ -38,7 +33,7 @@ class Schedule
 {
 private:
 
-    vector<ScheduleEntry> schedule;
+    vector<ScheduleEntry*> schedule;
 
 public:
 
@@ -51,7 +46,7 @@ class Schedules
 {
 private:
 
-    vector<Schedule> schedules;
+    vector<Schedule*> schedules;
 
 public:
 
@@ -59,5 +54,3 @@ public:
     ~Schedules();
 
 };
-
-#endif

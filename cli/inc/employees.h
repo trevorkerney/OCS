@@ -1,5 +1,4 @@
-#ifndef _OCS_EMPLOYEE
-#define _OCS_EMPLOYEE
+#pragma once
 
 #include <string>
 #include <vector>
@@ -8,16 +7,12 @@ using std::string;
 using std::vector;
 
 class Position;
-
-class Employee;
-class Employees;
-
 class Employee
 {
 private:
 
     string name;
-    vector<Position> positions;
+    vector<Position*> positions;
 
 public:
 
@@ -33,15 +28,13 @@ class Employees
 {
 private:
 
-    vector<Employee> employees;
+    vector<Employee*> employees;
 
 public:
 
     Employees();
     ~Employees();
 
-    
+
 
 };
-
-#endif

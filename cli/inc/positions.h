@@ -1,5 +1,4 @@
-#ifndef _OCS_POSITION
-#define _OCS_POSITION
+#pragma once
 
 #include "employees.h"
 
@@ -9,20 +8,17 @@
 using std::string;
 using std::vector;
 
-class Position;
-class Positions;
-
 class Position
 {
 private:
 
     string name;
     string filename;
-    vector<Employee> employees;
+    vector<Employee*> employees;
 
 public:
 
-    Position(string& p_name, string& p_filename, vector<Employee>& p_employees);
+    Position(string& p_name, string& p_filename, vector<Employee*>& p_employees);
     ~Position();
 
     void set_name(string& p_name);
@@ -31,8 +27,8 @@ public:
     void set_filename(string& p_filename);
     string get_filename() const;
 
-    void set_employees(vector<Employee>& p_employees);
-    vector<Employee> get_employees() const;
+    void set_employees(vector<Employee*>& p_employees);
+    vector<Employee*> get_employees() const;
 
 };
 
@@ -40,7 +36,7 @@ class Positions
 {
 private:
 
-    vector<Position> positions;
+    vector<Position*> positions;
 
 public:
 
@@ -48,5 +44,3 @@ public:
     ~Positions();
 
 };
-
-#endif
