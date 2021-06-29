@@ -1,37 +1,45 @@
-CC=g++
+CXX=g++
 VERS=-std=c++17
-CWARN=-Wall -Wextra -Wdeprecated
+CXXWARN=-Wall -Wextra -Wdeprecated
+CXXFLAGS=
 
-ifeq ($(OS),Windows_NT)
-	MKBINDIR=if not exist "bin" mkdir bin
-	EXECEXT=.exe
-	CLEAN=del /Q bin
+ifeq ($(DEBUG), 0)
+	BINDIR=bin/release
 else
-	MKBINDIR=mkdir -p bin
-	EXECEXT=
-	CLEAN=-rm bin/*
+	BINDIR=bin/debug
+	CXXFLAGS+=-D_DEBUG -g
 endif
 
-make: bin bin/OCS-cli
+ifeq ($(OS),Windows_NT)
+	MKBINDIR=if not exist "$(BINDIR)" mkdir "$(BINDIR)"
+	EXECEXT=.exe
+	CLEAN=if exist "$(BINDIR)" del /Q "$(BINDIR)"
+else
+	MKBINDIR=mkdir -p $(BINDIR)
+	EXECEXT=
+	CLEAN=-rm $(BINDIR)/*
+endif
 
-bin/OCS-cli: bin/main.o bin/schedules.o bin/positions.o bin/employees.o
-	$(CC) -g -o $@$(EXECEXT) $^
+all: $(BINDIR) $(BINDIR)/OCS-cli
 
-bin/main.o: src/main.cpp
-	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
+$(BINDIR)/OCS-cli: $(BINDIR)/main.o $(BINDIR)/schedules.o $(BINDIR)/positions.o $(BINDIR)/employees.o
+	$(CXX) $(CXXFLAGS) -o $@$(EXECEXT) $^
 
-bin/schedules.o: src/schedules.cpp inc/schedules.h
-	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
+$(BINDIR)/main.o: src/main.cpp
+	$(CXX) -c $(CXXFLAGS) $(VERS) $(CXXWARN) -o $@ $<
 
-bin/positions.o: src/positions.cpp inc/positions.h
-	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
+$(BINDIR)/schedules.o: src/schedules.cpp inc/schedules.h
+	$(CXX) -c $(CXXFLAGS) $(VERS) $(CXXWARN) -o $@ $<
 
-bin/employees.o: src/employees.cpp inc/employees.h
-	$(CC) -c -g $(VERS) $(CWARN) -o $@ $<
+$(BINDIR)/positions.o: src/positions.cpp inc/positions.h
+	$(CXX) -c $(CXXFLAGS) $(VERS) $(CXXWARN) -o $@ $<
 
-.PHONY: bin clean
+$(BINDIR)/employees.o: src/employees.cpp inc/employees.h
+	$(CXX) -c $(CXXFLAGS) $(VERS) $(CXXWARN) -o $@ $<
 
-bin:
+.PHONY: $(BINDIR) clean
+
+$(BINDIR):
 	${MKBINDIR}
 
 clean:
