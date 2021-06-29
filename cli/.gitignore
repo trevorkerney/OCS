@@ -1,2 +1,5 @@
 # Binaries & cache
-bin
+/bin/
+
+# Save data
+/data/
