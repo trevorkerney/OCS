@@ -1,10 +1,11 @@
 CXX=g++
 VERS=-std=c++17
-CXXWARN=-Wall -Wextra -Wdeprecated
+CXXWARN=
 CXXFLAGS=
 
 ifeq ($(DEBUG), 0)
 	BINDIR=bin/release
+	CXXWARN+=-Wall -Wextra -Wdeprecated
 else
 	BINDIR=bin/debug
 	CXXFLAGS+=-D_DEBUG -g
