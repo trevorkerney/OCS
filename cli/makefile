@@ -3,12 +3,12 @@ VERS=-std=c++17
 CXXWARN=
 CXXFLAGS=
 
-ifeq ($(DEBUG), 0)
-	BINDIR=bin/release
-	CXXWARN+=-Wall -Wextra -Wdeprecated
-else
+ifeq ($(DEBUG), 1)
 	BINDIR=bin/debug
 	CXXFLAGS+=-D_DEBUG -g
+else
+	BINDIR=bin/release
+	CXXWARN+=-Wall -Wextra -Wdeprecated
 endif
 
 ifeq ($(OS),Windows_NT)
