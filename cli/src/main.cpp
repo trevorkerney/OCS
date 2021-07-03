@@ -9,58 +9,7 @@ using std::string;
 using std::cout;
 using std::endl;
 
-#ifdef _WIN32
-
-    #include "windows.h"
-
-    void attach_gui()
-    {
-
-    }
-
-    void run_gui()
-    {
-        /*
-        STARTUPINFOA si;
-        PROCESS_INFORMATION pi;
-
-        ZeroMemory(&si, sizeof(si));
-        si.cb = sizeof(si);
-        ZeroMemory(&pi, sizeof(pi));
-
-        CreateProcessA(
-            "E:\\Dev\\projects\\OCS\\gui\\src-tauri\\target\\debug\\app.exe",
-            NULL,
-            NULL,
-            NULL,
-            false,
-            0,
-            NULL,
-            NULL,
-            &si,
-            &pi
-        );
-
-        CloseHandle(pi.hProcess);
-        CloseHandle(pi.hThread);
-        */
-    }
-
-#else
-
-    void attach_gui()
-    {
-    
-    }
-
-    void run_gui()
-    {
-        
-    }
-
-#endif
-
-string get_formatted_timestamp(time_t p_timestamp = time(0), const char* p_format = "%Y %b %d %a %I:%M %p") // https://en.cppreference.com/w/cpp/chrono/c/strftime
+string get_formatted_timestamp(time_t p_timestamp = time(0), const char* p_format = "%Y %b %d %a %I:%M %p" /* https://en.cppreference.com/w/cpp/chrono/c/strftime */)
 {
     const int timestamp_size = 80;
     char timestamp_buffer[timestamp_size];
@@ -76,6 +25,42 @@ string get_formatted_timestamp(time_t p_timestamp = time(0), const char* p_forma
     return string(timestamp_buffer);
 }
 
+string get_data_path()
+{
+    #if defined(_DEBUG)
+
+        return "../data/";
+
+    #else
+        #if defined(_WIN32)
+
+            /*wchar_t* datapath = 0;
+            SHGetKnownFolderPath(FOLDERID_RoamingAppData, 0, NULL, &datapath);
+            std::wstring ws(datapath);
+            string str(ws.begin(), ws.end());
+            return str;
+
+            PWSTR path[MAX_PATH];
+            SHGetFolderPath(NULL, CSIDL_APPDATA, NULL, 0, *path);
+
+            return std::wstring(path);*/
+            
+        #elif defined(__APPLE__)
+
+
+
+        #elif defined(__linux__)
+
+
+        
+        #else
+
+            return "";
+
+        #endif
+    #endif
+}
+
 int main(int argc, char* argv[])
 {
     if (argc == 1)
@@ -83,9 +68,21 @@ int main(int argc, char* argv[])
         cout << "On-Call Scheduler" << endl;
         cout << get_formatted_timestamp() << endl;
 
+        
+
+        cout << endl << "Press enter to continue..."; std::cin.get();
         return 0;
     }
-    
-    //cout << "Usage: ocs-cli [create/edit/delete] [schedule/position/employee]" << endl;
-    return 1;
+    else
+    {
+        for (int _i = 1; _i < argc; _i++)
+        {
+            cout << argv[_i] << " ";
+        }
+        //cout << "Usage: ocs-cli [create/edit/delete] [schedule/position/employee]" << endl;
+        cout << endl << "Usage: ocs-cli (no options)";
+
+        cout << endl << "Press enter to continue..."; std::cin.get();
+        return 1;
+    }
 }
