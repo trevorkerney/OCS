@@ -1,9 +1,13 @@
 #include <iostream>
 #include <ctime>
 #include <string>
-#include <cstring>
+
+#include "../deps/include/nlohmann/json.hpp"
+using json = nlohmann::json;
 
 #include "../inc/schedules.h"
+#include "../inc/positions.h"
+#include "../inc/employees.h"
 
 using std::string;
 using std::cout;
@@ -21,7 +25,7 @@ string get_formatted_timestamp(time_t p_timestamp = time(0), const char* p_forma
         p_format,
         timeinfo
     );
-
+    
     return string(timestamp_buffer);
 }
 
@@ -68,9 +72,17 @@ int main(int argc, char* argv[])
         cout << "On-Call Scheduler" << endl;
         cout << get_formatted_timestamp() << endl;
 
-        
+        string data_path = get_data_path();
 
-        cout << endl << "Press enter to continue..."; std::cin.get();
+        Employees em(data_path);
+
+        Positions po(data_path, em);
+
+        Schedules sc(data_path, po, em);
+
+        #if defined(_DEBUG)
+            cout << endl << "Press enter to end debugging session..."; std::cin.get();
+        #endif
         return 0;
     }
     else
@@ -79,10 +91,11 @@ int main(int argc, char* argv[])
         {
             cout << argv[_i] << " ";
         }
-        //cout << "Usage: ocs-cli [create/edit/delete] [schedule/position/employee]" << endl;
         cout << endl << "Usage: ocs-cli (no options)";
 
-        cout << endl << "Press enter to continue..."; std::cin.get();
+        #if defined(_DEBUG)
+            cout << endl << "Press enter to end debugging session..."; std::cin.get();
+        #endif
         return 1;
     }
 }
