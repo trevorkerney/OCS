@@ -3,3 +3,6 @@
 
 # Save data
 /data/
+
+# Temporary files
+/temp/
