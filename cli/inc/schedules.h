@@ -62,7 +62,7 @@ enum time_unit
 
 enum selection_method
 {
-    ordered, random
+    ordered, randomized
 };
 
 class Schedule
