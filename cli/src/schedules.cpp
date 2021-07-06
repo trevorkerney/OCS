@@ -204,9 +204,9 @@ vector<string> Schedules::get_schedule_files()
 
         vector<string> files;
 
-        for (const filesystem::directory_entry& entry : filesystem::directory_iterator(this -> datapath))
+        for (const filesystem::directory_entry& entry : filesystem::directory_iterator(this -> relative_datapath))
         {
-            string file = string(entry.path()).substr(this -> datapath.length(), string(entry.path()).length());
+            string file = string(entry.path()).substr(this -> relative_datapath.length(), string(entry.path()).length());
 
             if (file.rfind("schedule_", 0) == 0)
             {
